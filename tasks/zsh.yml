@@ -1,0 +1,94 @@
+---
+- name: Install ZSH
+  apt:
+    name: zsh
+  become: true
+
+- name: Create ZSH folders
+  file:
+    path: "{{ item }}"
+    recurse: yes
+    state: directory
+  loop:
+    - "{{ xdg.XDG_CONFIG_HOME }}/zsh"
+    - "{{ xdg.XDG_DATA_HOME }}/dircolors"
+
+- name: Set ZDOTDIR in {{ zsh.zshenv }}
+  lineinfile:
+    dest: "{{ zsh.zshenv }}"
+    backup: yes
+    line: export ZDOTDIR="$HOME/.config/zsh"
+  become: yes
+
+- name: Switch user shell to zsh
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh
+  become: true
+
+- name: Clone zsh plugin repos
+  git:
+    repo: "{{ item }}"
+    dest: "{{ xdg.XDG_DATA_HOME }}/{{ item|basename }}"
+  loop:
+    - https://github.com/sindresorhus/pure
+    - https://github.com/chriskempson/base16-shell
+
+- name: Symlink pure.zsh into {{ zsh.fpath }}
+  file:
+    src: "{{ xdg.XDG_DATA_HOME }}/pure/pure.zsh"
+    dest: "{{ zsh.fpath }}/prompt_pure_setup"
+    state: link
+  become: true
+
+- name: Symlink async.zsh into {{ zsh.fpath }}
+  file:
+    src: "{{ xdg.XDG_DATA_HOME }}/pure/async.zsh"
+    dest: "{{ zsh.fpath }}/async"
+    state: link
+  become: true
+
+- name: Copy dircolors file into {{ xdg.XDG_DATA_HOME }}
+  copy:
+    src: zsh/dircolors.base16.dark
+    dest: "{{ xdg.XDG_DATA_HOME }}/dircolors/dircolors.base16.dark"
+
+- name: Update .zshrc
+  blockinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    create: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - zsh.yml"
+    block: |
+      # zsh history
+      HISTFILE={{ xdg.XDG_DATA_HOME }}/zsh_histfile
+      HISTSIZE=1000
+      SAVEHIST=1000
+      setopt appendhistory autocd nomatch notify
+      bindkey -v
+      # zsh completion
+      zstyle :compinstall filename "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+      autoload -Uz compinit
+      compinit
+      # enable suggestions for commands not found
+      source /etc/zsh_command_not_found
+      # Aliases
+      alias ls='ls --color=auto'
+      alias grep='grep --color'
+      alias la='ls -la'
+      alias l='ls'
+      alias cp='cp -i'
+      alias mv='mv -i'
+      # load pure prompt
+      autoload -U promptinit; promptinit
+      prompt pure
+      # Load base-16 shell colors
+      BASE16_SHELL={{ xdg.XDG_DATA_HOME }}/base16-shell
+      [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+      # set dircolors
+      eval `dircolors {{ xdg.XDG_DATA_HOME }}/dircolors/dircolors.base16.dark`
+
+# remove .zshrc created by zsh install, since we keep it in xdg config folder
+- name: Ensure ~/.zshrc is absent
+  file:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    state: absent

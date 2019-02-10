@@ -1,0 +1,21 @@
+---
+- name: Copy dotfiles to HOME
+  copy:
+    src: "dotfiles/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.{{ item }}"
+  loop:
+    - ideavimrc
+    - editorconfig
+
+- name: Copy dotfiles to config
+  copy:
+    src: "dotfiles/{{ item }}"
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/"
+  loop:
+    - git
+
+- name: Copy /bin files
+  copy:
+    src: dotfiles/bin
+    dest: "{{ ansible_env.HOME }}/"
+    mode: 0744

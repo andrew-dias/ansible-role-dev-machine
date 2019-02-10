@@ -1,0 +1,52 @@
+---
+- name: Create NVM install dir
+  file:
+    path: "{{ xdg.XDG_DATA_HOME }}/nvm"
+    state: directory
+
+- name: Install NVM
+  shell: >
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v{{ nvm.version }}/install.sh | zsh
+  args:
+    executable: /bin/zsh
+    creates: "{{ xdg.XDG_DATA_HOME }}/nvm/nvm.sh"
+    warn: false # ignore curl warnings
+  environment:
+    NVM_DIR: "{{ xdg.XDG_DATA_HOME }}/nvm"
+
+- name: Add NVM to .zshrc
+  blockinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - nvm.yml"
+    block: |
+      export NVM_DIR="{{ xdg.XDG_DATA_HOME }}/nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+      autoload -U add-zsh-hook
+      load-nvmrc() {
+        local node_version="$(nvm version)"
+        local nvmrc_path="$(nvm_find_nvmrc)"
+        if [ -n "$nvmrc_path" ]; then
+          local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+          if [ "$nvmrc_node_version" = "N/A" ]; then
+            nvm install
+          elif [ "$nvmrc_node_version" != "$node_version" ]; then
+            nvm use
+          fi
+        elif [ "$node_version" != "$(nvm version default)" ]; then
+          echo "Reverting to nvm default version"
+          nvm use default
+        fi
+      }
+      add-zsh-hook chpwd load-nvmrc
+      load-nvmrc
+
+- name: Install NVM node versions
+  shell: >
+    . {{ xdg.XDG_DATA_HOME }}/nvm/nvm.sh && nvm install {{ item }}
+  args:
+    executable: /bin/zsh
+    creates: "{{ xdg.XDG_DATA_HOME }}/nvm/versions/node/v{{ item }}"
+  loop:
+    - 10.15.1
+    - 8.15.0

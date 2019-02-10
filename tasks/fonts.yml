@@ -1,0 +1,17 @@
+- name: Create font directory
+  file:
+    path: "{{ xdg.XDG_DATA_HOME }}/fonts"
+    state: directory
+
+- name: Download fonts
+  unarchive:
+    remote_src: yes
+    src: "{{ item['archive_url'] }}"
+    dest: "{{ xdg.XDG_DATA_HOME }}/fonts"
+  with_items: "{{ fonts }}"
+  register: archive_contents
+
+- name: Update fonts cache
+  command: fc-cache -f -v
+  become: true
+  when: archive_contents is changed

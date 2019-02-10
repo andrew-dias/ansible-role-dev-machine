@@ -1,0 +1,51 @@
+---
+- name: Create XDG standard folders
+  file:
+    path: "{{ item }}"
+    recurse: yes
+    state: directory
+  loop:
+    - "{{ xdg.XDG_DATA_HOME }}"
+    - "{{ xdg.XDG_CONFIG_HOME }}"
+    - "{{ xdg.XDG_CACHE_HOME }}"
+
+- name: Add XDG env vars to bash/zsh
+  blockinfile:
+    dest: "{{ item }}"
+    create: yes
+    backup: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - xdg.yml"
+    block: |
+      export XDG_CONFIG_HOME={{ xdg.XDG_CONFIG_HOME }}
+      export XDG_DATA_HOME={{ xdg.XDG_DATA_HOME }}
+      export XDG_CACHE_HOME={{ xdg.XDG_CACHE_HOME }}
+  loop:
+    - "{{ ansible_env.HOME }}/.bashrc"
+    - "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+
+# Remove some standard folders from home folder
+# See http://jamesmcminn.com/2012/12/removing-entries-from-nautilus-3-6-places/
+- name: Write XDG user-dirs config
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/"
+    backup: yes
+  loop:
+    - xdg/user-dirs.dirs
+    - xdg/user-dirs.conf
+
+- name: Create empty template file
+  copy:
+    src: xdg/empty-template
+    dest: "{{ ansible_env.HOME }}/Templates/Empty Document"
+
+- name: Delete unused home directories
+  file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: absent
+  loop:
+    - Public
+    - Documents
+    - Music
+    - Pictures
+    - Videos

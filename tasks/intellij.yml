@@ -1,0 +1,5 @@
+---
+- name: IntelliJ - Copy ideavimrc
+  copy:
+    src: intellij/.ideavimrc
+    dest: "{{ ansible_env.HOME }}/"

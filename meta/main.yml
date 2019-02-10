@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Andrew Dias
+  description: A role for configuring my Linux-based dev machine. Tested on Pop_OS! 18.10.
+  license: MIT
+  min_ansible_version: 2.4
+  github_branch: mster
+  platforms:
+  - name: Ubuntu
+    versions:
+    - 18.10
+
+  galaxy_tags:
+  - developer
+  - workstation
+  - linux
+
+dependencies:
+  - { name: cmprescott.chrome, become: yes }
+  - { name: ngetchell.vscode, become: yes }
+#  - { name: jaredhocutt.jetbrains_toolbox, become: yes }
+
+

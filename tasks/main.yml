@@ -1,0 +1,36 @@
+---
+- include: zsh.yml
+  tags: [zsh]
+
+- include: xdg.yml
+  tags: [xdg]
+
+- include: nvm.yml
+  tags: [nvm]
+
+- include: sdkman.yml
+  tags: [sdkman]
+
+- include: neovim.yml
+  tags: [neovim]
+
+- include: tmux.yml
+  tags: [tmux]
+
+- include: packages.yml
+  tags: [packages]
+
+- include: sysctl.yml
+  tags: [sysctl]
+
+- include: fonts.yml
+  tags: [fonts]
+
+- include: dotfiles.yml
+  tags: [dotfiles]
+
+- include: dconf.yml
+  tags: [dconf]
+
+- include: ssh.yml
+  tags: [ssh]

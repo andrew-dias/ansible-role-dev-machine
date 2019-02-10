@@ -1,0 +1,25 @@
+---
+### Default vars ###
+
+# xdg
+xdg:
+  XDG_CACHE_HOME: "{{ ansible_env.HOME }}/.cache"
+  XDG_CONFIG_HOME: "{{ ansible_env.HOME }}/.config"
+  XDG_DATA_HOME: "{{ ansible_env.HOME }}/.local/share"
+
+# zsh
+zsh:
+  zshenv: /etc/zsh/zshenv
+  fpath: /usr/local/share/zsh/site-functions
+
+# nvm
+nvm:
+  version: 0.34.0
+
+# fonts
+fonts:
+  - name: hasklig
+    archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
+
+# node versions
+node_versions: [10.15.1, 8.15.0]

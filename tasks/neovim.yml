@@ -1,0 +1,49 @@
+---
+- name: Add Neovim PPA
+  apt_repository:
+    repo: "ppa:neovim-ppa/unstable"
+  become: true
+
+- name: Install Neovim
+  apt:
+    name: neovim
+  become: true
+
+- name: Create Neovim dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+  loop:
+    - "{{ xdg.XDG_CONFIG_HOME }}/nvim"
+    - "{{ xdg.XDG_DATA_HOME }}/nvim/site/autoload"
+
+- name: Clone vim-plug
+  git:
+    repo: https://github.com/junegunn/vim-plug.git
+    dest: "{{ xdg.XDG_DATA_HOME }}/vim-plug"
+
+- name: Copy plug.vim into autoload folder
+  copy:
+    src: "{{ xdg.XDG_DATA_HOME }}/vim-plug/plug.vim"
+    dest: "{{ xdg.XDG_DATA_HOME }}/nvim/site/autoload/"
+
+- name: Copy init.vim into config folder
+  copy:
+    src: neovim/init.vim
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/nvim/init.vim"
+
+# TODO: this always registers as change
+- name: Install Neovim plugins (**always registers as changed**)
+  shell: >
+    nvim +'PlugInstall --sync' +qa
+
+- name: Set Neovim alternatives
+  alternatives:
+    link: "/usr/bin/{{ item }}"
+    name: "{{ item }}"
+    path: /usr/bin/nvim
+  become: true
+  loop:
+    - vi
+    - vim

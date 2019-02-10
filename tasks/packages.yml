@@ -1,0 +1,14 @@
+---
+- name: Install APT packages
+  apt:
+    name: "{{ item }}"
+  become: true
+  loop:
+    - jq
+    - dconf-editor
+
+# can't point to gitkraken url because apt won't follow redirect to cdn
+- name: Install Gitkraken
+  apt:
+    deb: https://release.axocdn.com/linux/gitkraken-amd64.deb
+  become: true

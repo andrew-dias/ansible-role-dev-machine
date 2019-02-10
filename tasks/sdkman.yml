@@ -1,0 +1,25 @@
+---
+- name: Install SDKMAN!
+  shell: >
+    curl -o- https://get.sdkman.io | zsh
+  args:
+    creates: "{{ xdg.XDG_DATA_HOME }}/sdkman"
+    warn: false # ignore curl warnings
+  environment:
+    SDKMAN_DIR: "{{ xdg.XDG_DATA_HOME }}/sdkman"
+
+- name: Add SDKMAN! to .zshrc
+  blockinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - sdkman.yml"
+    insertafter: EOF
+    block: |
+      # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+      export SDKMAN_DIR="{{ xdg.XDG_DATA_HOME }}/sdkman"
+      [[ -s "{{ xdg.XDG_DATA_HOME }}/sdkman/bin/sdkman-init.sh" ]] && source "{{ xdg.XDG_DATA_HOME }}/sdkman/bin/sdkman-init.sh"
+
+# SDKMAN creates a .zshrc in the root because it doesn't respect XDG
+- name: Remove ~/.zshrc created by SDKMAN!
+  file:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    state: absent
