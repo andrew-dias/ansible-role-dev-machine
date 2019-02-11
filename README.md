@@ -44,10 +44,16 @@ Locations of certain zsh folders can be overriden.
 
 Specific software versions can be overriden.
 
-| Variable      	  | Default Value     	  |
-|-----------------	|---------------------	|
-| `nvm.version`   	| `0.34.0`            	|
-| `node.versions` 	| `[10.15.1, 8.15.0]` 	|
+| Variable          | Default Value         |
+|-----------------  |---------------------  |
+| `nvm.version`     | `0.34.0`              |
+| `node.versions`   | `[10.15.1, 8.15.0]`   |
+
+A optional ssh key passphrase can be set.
+
+| Variable              | Default Value |
+|---------------------- |-------------- |
+| `ssh_key_passphrase`  | `empty`       |
 
 The list of fonts to install can be overriden by adding to the `fonts` list.
 
@@ -57,7 +63,6 @@ fonts:
   - name: hasklig
     archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
 ```
-The playbook will generate a SSH keypair, which is protected with `ssh_key_passphrase`.
 
 Dependencies
 ------------
@@ -72,7 +77,7 @@ Example Playbook
       roles:
         andrew-dias.ansible-role-dev-machine
 
-      # prompt for password interactively 
+      # optionally prompt for ssh key passphrase
       - vars_prompt:
         - name: "ssh_key_passphrase"
           prompt: "Enter SSH key passphrase"
