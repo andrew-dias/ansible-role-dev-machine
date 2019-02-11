@@ -3,7 +3,13 @@
     name: tmux
   become: true
 
-- name: Copy .tmux.conf
+- name: Define tmux alias command that respects XDG
+  lineinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    line: "alias tmux='tmux -f {{ xdg.XDG_CONFIG_HOME }}/tmux/tmux.conf'"
+
+- name: Copy tmux config
   copy:
-    src: tmux/tmux.conf
-    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+    src: tmux
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/"
+
