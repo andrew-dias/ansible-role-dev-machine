@@ -6,3 +6,8 @@
     ssh_key_bits: 4096
     ssh_key_file: ".ssh/{{ ansible_env.USER }}@{{ ansible_hostname }}"
     ssh_key_passphrase: "{{ ssh_key_passphrase }}"
+  register: create_ssh
+
+- name: Upload Github key
+  script: replace-github-ssh-key.sh -u '{{ github_username }}' -p '{{ github_password }}' -k {{ ansible_env.USER }}@{{ ansible_hostname }}
+  when: create_ssh is changed
