@@ -6,6 +6,7 @@
   loop:
     - jq
     - dconf-editor
+    - python-pip
 
 # can't point to gitkraken url because apt won't follow redirect to cdn
 - name: Install Debian packages
@@ -14,3 +15,11 @@
   become: yes
   loop:
     - https://release.axocdn.com/linux/gitkraken-amd64.deb
+
+# install pip packages
+- name: Install Ansible Toolbox
+  pip:
+    name: "{{ item }}"
+  become: yes
+  loop:
+    - git+https://github.com/larsks/ansible-toolbox

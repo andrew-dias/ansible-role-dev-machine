@@ -26,4 +26,5 @@ node_versions: [10.15.1, 8.15.0]
 
 # ssh
 ssh_key_passphrase:
-
+github_username:
+github_password:
