@@ -2,12 +2,12 @@
 - name: Add Neovim PPA
   apt_repository:
     repo: "ppa:neovim-ppa/unstable"
-  become: true
+  become: yes
 
 - name: Install Neovim
   apt:
     name: neovim
-  become: true
+  become: yes
 
 - name: Create Neovim dirs
   file:
@@ -43,7 +43,7 @@
     link: "/usr/bin/{{ item }}"
     name: "{{ item }}"
     path: /usr/bin/nvim
-  become: true
+  become: yes
   loop:
     - vi
     - vim

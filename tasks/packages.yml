@@ -2,7 +2,7 @@
 - name: Install APT packages
   apt:
     name: "{{ item }}"
-  become: true
+  become: yes
   loop:
     - jq
     - dconf-editor

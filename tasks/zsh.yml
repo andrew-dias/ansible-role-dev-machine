@@ -2,7 +2,7 @@
 - name: Install ZSH
   apt:
     name: zsh
-  become: true
+  become: yes
 
 - name: Create ZSH folders
   file:
@@ -24,7 +24,7 @@
   user:
     name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh
-  become: true
+  become: yes
 
 - name: Clone zsh plugin repos
   git:
@@ -39,14 +39,14 @@
     src: "{{ xdg.XDG_DATA_HOME }}/pure/pure.zsh"
     dest: "{{ zsh.fpath }}/prompt_pure_setup"
     state: link
-  become: true
+  become: yes
 
 - name: Symlink async.zsh into {{ zsh.fpath }}
   file:
     src: "{{ xdg.XDG_DATA_HOME }}/pure/async.zsh"
     dest: "{{ zsh.fpath }}/async"
     state: link
-  become: true
+  become: yes
 
 - name: Copy dircolors file into {{ xdg.XDG_DATA_HOME }}
   copy:

@@ -13,5 +13,5 @@
 
 - name: Update fonts cache
   command: fc-cache -f -v
-  become: true
+  become: yes
   when: archive_contents is changed

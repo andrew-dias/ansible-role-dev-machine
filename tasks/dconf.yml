@@ -2,7 +2,7 @@
 - name: Install python-psutil
   apt:
     name: python-psutil
-  become: true
+  become: yes
 
 - name: Enable Night Light
   dconf:
