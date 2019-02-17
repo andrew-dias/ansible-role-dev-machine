@@ -8,7 +8,9 @@
     - dconf-editor
 
 # can't point to gitkraken url because apt won't follow redirect to cdn
-- name: Install Gitkraken
+- name: Install Debian packages
   apt:
-    deb: https://release.axocdn.com/linux/gitkraken-amd64.deb
-  become: true
+    deb: "{{ item }}"
+  become: yes
+  loop:
+    - https://release.axocdn.com/linux/gitkraken-amd64.deb
