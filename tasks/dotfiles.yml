@@ -14,8 +14,8 @@
   loop:
     - git
 
-- name: Copy /bin files
+- name: Copy bin files
   copy:
     src: dotfiles/bin
-    dest: "{{ ansible_env.HOME }}/"
+    dest: "{{ ansible_env.HOME }}/.local/"
     mode: 0744
