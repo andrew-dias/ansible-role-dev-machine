@@ -33,10 +33,10 @@
     src: neovim/init.vim
     dest: "{{ xdg.XDG_CONFIG_HOME }}/nvim/init.vim"
 
-# TODO: this always registers as change
-- name: Install Neovim plugins (**always registers as changed**)
+- name: Install Neovim plugins
   shell: >
     nvim +'PlugInstall --sync' +qa
+  changed_when: false  # it always registered as changed, so block it
 
 - name: Set Neovim alternatives
   alternatives:
