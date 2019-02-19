@@ -9,3 +9,27 @@
     key: "/org/gnome/calendar/follow-night-light"
     value: "true"
     state: present
+
+- name: Set OpenWeather temperature unit
+  dconf:
+    key: "/org/gnome/shell/extensions/openweather/unit"
+    value: "'celsius'"
+    state: present
+
+- name: Set OpenWeather windspeed unit
+  dconf:
+    key: "/org/gnome/shell/extensions/openweather/wind-speed-unit"
+    value: "'kph'"
+    state: present
+
+- name: Set OpenWeather city
+  dconf:
+    key: "/org/gnome/shell/extensions/openweather/city"
+    value: "'45.5505849,-73.6022317400012>Montréal (06), Québec, Canada >-1'"
+    state: present
+
+- name: Set Drop-Down-Terminal shortcut
+  dconf:
+    key: "/org/zzrough/gs-extensions/drop-down-terminal/real-shortcut"
+    value: "['<Primary>grave']"
+    state: present
