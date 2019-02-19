@@ -3,3 +3,6 @@
 git config user.name "Andrew Dias"
 git config user.email andrew-dias@users.noreply.github.com
 
+echo user.name: $(git config --get --local user.name)
+echo user.email: $(git config --get --local user.email)
+
