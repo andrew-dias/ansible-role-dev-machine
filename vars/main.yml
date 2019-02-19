@@ -1,0 +1,5 @@
+---
+# ansible-gnome-extensions
+gnome_extension_ids:
+  - 442   # drop-down-terminal
+  - 750   # OpenWeather
