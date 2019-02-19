@@ -17,7 +17,7 @@
     - https://release.axocdn.com/linux/gitkraken-amd64.deb
 
 # install pip packages
-- name: Install Ansible Toolbox
+- name: Install Pip packages
   pip:
     name: "{{ item }}"
   become: yes
