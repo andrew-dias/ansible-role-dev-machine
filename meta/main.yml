@@ -15,9 +15,20 @@ galaxy_info:
   - linux
 
 dependencies:
-  - { name: cmprescott.chrome, become: yes, tags: [chrome] }
-  - { name: ngetchell.vscode, become: yes, tags: [vscode] }
-#  - { name: jaredhocddutt.jetbrains_toolbox, become: yes, tags: [jetbrains] }
+  - name: cmprescott.chrome
+    become: yes
+    tags:
+      - chrome
+
+  - name: ngetchell.vscode
+    become: yes
+    tags:
+      - vscode
+
+  - name: jaredhocutt.jetbrains_toolbox
+    tags:
+      - jetbrains
+
   - name: ansible-gnome-extensions
     scm: git
     src: git+https://github.com/andrew-dias/ansible-gnome-extensions.git
