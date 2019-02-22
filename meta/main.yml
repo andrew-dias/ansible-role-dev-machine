@@ -29,6 +29,11 @@ dependencies:
     tags:
       - jetbrains
 
+  - name: gantsign.postman
+    become: yes
+    tags:
+      - postman
+
   - name: ansible-gnome-extensions
     scm: git
     src: git+https://github.com/andrew-dias/ansible-gnome-extensions.git
