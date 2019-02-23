@@ -34,6 +34,11 @@ dependencies:
     tags:
       - postman
 
+  - name: geerlingguy.docker
+    become: yes
+    tags:
+      - docker
+
   - name: ansible-gnome-extensions
     scm: git
     src: git+https://github.com/andrew-dias/ansible-gnome-extensions.git

@@ -3,3 +3,7 @@
 gnome_extension_ids:
   - 442   # drop-down-terminal
   - 750   # OpenWeather
+
+# geerlinguy.docker
+docker_users:
+  - "{{ ansible_user_id }}"
