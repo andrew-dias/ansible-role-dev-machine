@@ -1,36 +1,52 @@
 ---
 - include: zsh.yml
-  tags: [zsh]
+  tags:
+    - zsh
 
 - include: xdg.yml
-  tags: [xdg]
+  tags:
+    - xdg
 
 - include: nvm.yml
-  tags: [nvm]
+  tags:
+    - nvm
 
 - include: sdkman.yml
-  tags: [sdkman]
+  tags:
+    - sdkman
 
 - include: neovim.yml
-  tags: [neovim]
+  tags:
+    - neovim
 
 - include: tmux.yml
-  tags: [tmux]
+  tags:
+    - tmux
 
 - include: packages.yml
-  tags: [packages]
+  tags:
+    - packages
+
+- include: spotify.yml
+  tags:
+    - spotify
 
 - include: sysctl.yml
-  tags: [sysctl]
+  tags:
+    - sysctl
 
 - include: fonts.yml
-  tags: [fonts]
+  tags:
+    - fonts
 
 - include: dotfiles.yml
-  tags: [dotfiles]
+  tags:
+    - dotfiles
 
 - include: dconf.yml
-  tags: [dconf]
+  tags:
+    - dconf
 
 - include: ssh.yml
-  tags: [ssh]
+  tags:
+    - ssh
