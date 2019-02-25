@@ -15,9 +15,14 @@ The role includes:
 * Fonts
 * [Visual Studio Code](https://code.visualstudio.com)
 * [Gitkraken](https://www.gitkraken.com)
-* Google Chrome
+* [Google Chrome](https://www.google.com/chrome)
+* [Spotify](https://www.spotify.com)
+* [Postman](https://www.getpostman.com)
+* [Jetbrains Toolbox](https://www.jetbrains.com/toolbox)
+* [Docker CE](https://www.docker.com)
+* Gnome extensions
 * Scripts and dotfiles
-* Generate SSH keypair for `user@machine`
+* Generate SSH keypair for `user@machine` and upload to Github
 
 Requirements
 ------------
