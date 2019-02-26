@@ -5,14 +5,14 @@ galaxy_info:
   min_ansible_version: 2.4
   github_branch: mster
   platforms:
-  - name: Ubuntu
-    versions:
-    - 18.10
+    - name: Ubuntu
+      versions:
+        - 18.10
 
   galaxy_tags:
-  - developer
-  - workstation
-  - linux
+    - developer
+    - workstation
+    - linux
 
 dependencies:
   - name: cmprescott.chrome
@@ -38,6 +38,22 @@ dependencies:
     become: yes
     tags:
       - docker
+
+  - name: ansible-role-vagrant
+    scm: git
+    src: git+https://github.com/andrew-dias/ansible-role-vagrant.git
+    version: master
+    become: yes
+    tags:
+      - vagrant
+
+  - name: ansible-role-virtualbox
+    scm: git
+    src: git+https://github.com/andrew-dias/ansible-role-virtualbox.git
+    version: master
+    become: yes
+    tags:
+      - virtualbox
 
   - name: ansible-gnome-extensions
     scm: git
