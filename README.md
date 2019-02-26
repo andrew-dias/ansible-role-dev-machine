@@ -20,6 +20,7 @@ The role includes:
 - [Jetbrains Toolbox](https://www.jetbrains.com/toolbox)
 - [Docker CE](https://www.docker.com)
 - [VirtualBox](https://www.virtualbox.org)
+- [Vagrant](https://www.vagrantup.com)
 - [Gnome extensions](https://github.com/andrew-dias/ansible-gnome-extensions)
 - Scripts and dotfiles
 - Generate SSH keypair for `user@machine` and upload to Github

@@ -50,3 +50,7 @@
 - include: ssh.yml
   tags:
     - ssh
+
+- include: vagrant.yml
+  tags:
+    - vagrant

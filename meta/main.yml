@@ -39,7 +39,15 @@ dependencies:
     tags:
       - docker
 
-  - name: ansible-virtualbox
+  - name: ansible-role-vagrant
+    scm: git
+    src: git+https://github.com/andrew-dias/ansible-role-vagrant.git
+    version: master
+    become: yes
+    tags:
+      - vagrant
+
+  - name: ansible-role-virtualbox
     scm: git
     src: git+https://github.com/andrew-dias/ansible-role-virtualbox.git
     version: master

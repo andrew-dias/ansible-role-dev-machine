@@ -1,0 +1,9 @@
+---
+- name: Set VAGRANT_HOME in zshrc
+  blockinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - vagrant.yml"
+    insertbefore: BOF
+    block: |
+      export VAGRANT_HOME="{{ xdg.XDG_DATA_HOME }}/vagrant"
+      export VAGRANT_ALIAS_FILE=$VAGRANT_HOME/aliases
