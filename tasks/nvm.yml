@@ -47,6 +47,4 @@
   args:
     executable: /bin/zsh
     creates: "{{ xdg.XDG_DATA_HOME }}/nvm/versions/node/v{{ item }}"
-  loop:
-    - 10.15.1
-    - 8.15.0
+  loop: "{{ node.versions }}"

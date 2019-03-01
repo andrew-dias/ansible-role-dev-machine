@@ -22,16 +22,18 @@ fonts:
     archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
 
 # node versions
-node_versions:
-  - 10.15.1
-  - 8.15.0
+node:
+  versions:
+    - 10.15.1
+    - 8.15.0
 
 # ssh
-ssh_key_passphrase:
-github_username:
-github_password:
-gitlab_host:
-gitlab_token:
+ssh:
+  passphrase:
+  github_username:
+  github_password:
+  gitlab_host:
+  gitlab_token:
 
 # mattermost
 mattermost:
