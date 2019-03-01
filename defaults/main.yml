@@ -30,3 +30,5 @@ node_versions:
 ssh_key_passphrase:
 github_username:
 github_password:
+gitlab_host:
+gitlab_token:
