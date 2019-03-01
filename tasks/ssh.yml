@@ -17,43 +17,45 @@
     ssh_key_passphrase: "{{ ssh.passphrase }}"
   register: create_ssh
 
-- name: Upload Github key
-  script: replace-github-ssh-key.sh -u '{{ ssh.github_username }}' -p '{{ ssh.github_password }}' -k {{ ssh_key_name }}
+- name: Upload keys
+  block:
+    - name: Upload Github key
+      script: replace-github-ssh-key.sh -u '{{ ssh.github_username }}' -p '{{ ssh.github_password }}' -k {{ ssh_key_name }}
+
+    ##---Upload ssh key to Gitlab---##
+    - name: Get ssh keys from Gitlab
+      uri:
+        url: "{{ ssh.gitlab_host }}/api/v4/user/keys"
+        method: GET
+        headers:
+          Private-Token: "{{ ssh.gitlab_token }}"
+        status_code: "200"
+      register: gitlab_ssh_keys
+
+    - name: "Find matching key in json response"
+      set_fact:
+        gitlab_key_id: "{{ item }}"
+      loop: '{{ gitlab_ssh_keys.json | json_query("[?title==''" + ssh_key_name + "''].id") | default([], true)}}'
+
+    - name: "Delete key from gitlab if exists"
+      uri:
+        url: "{{ ssh.gitlab_host }}/api/v4/user/keys/{{ gitlab_key_id }}"
+        method: DELETE
+        headers:
+          Private-Token: "{{ ssh.gitlab_token }}"
+        status_code: "204"
+      when: gitlab_key_id is defined
+
+    - name: "Upload new key to gitlab"
+      uri:
+        url: "{{ ssh.gitlab_host }}/api/v4/user/keys"
+        method: POST
+        headers:
+          Private-Token: "{{ ssh.gitlab_token }}"
+        body_format: json
+        body: "{{ lookup('template', 'gitlab-post-json-template.j2') }}"
+        status_code: "201"
   when: create_ssh is changed
-
-##---Upload ssh key to Gitlab---##
-- name: Get ssh keys from Gitlab
-  uri:
-    url: "{{ ssh.gitlab_host }}/api/v4/user/keys"
-    method: GET
-    headers:
-      Private-Token: "{{ ssh.gitlab_token }}"
-    status_code: "200"
-  register: gitlab_ssh_keys
-
-- name: "Find matching key in json response"
-  set_fact:
-    gitlab_key_id: "{{ item }}"
-  loop: '{{ gitlab_ssh_keys.json | json_query("[?title==''" + ssh_key_name + "''].id") }}'
-
-- name: "Delete key from gitlab if exists"
-  uri:
-    url: "{{ ssh.gitlab_host }}/api/v4/user/keys/{{ gitlab_key_id }}"
-    method: DELETE
-    headers:
-      Private-Token: "{{ ssh.gitlab_token }}"
-    status_code: "204"
-  when: gitlab_key_id is defined
-
-- name: "Upload new key to gitlab"
-  uri:
-    url: "{{ ssh.gitlab_host }}/api/v4/user/keys"
-    method: POST
-    headers:
-      Private-Token: "{{ ssh.gitlab_token }}"
-    body_format: json
-    body: "{{ lookup('template', 'gitlab-post-json-template.j2') }}"
-    status_code: "201"
 
 # set SSH key as default key
 - name: Set SSH key as default
