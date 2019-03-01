@@ -54,3 +54,16 @@
     body_format: json
     body: "{{ lookup('template', 'gitlab-post-json-template.j2') }}"
     status_code: "201"
+
+# set SSH key as default key
+- name: Set SSH key as default
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    create: yes
+    block: |
+      IdentityFile {{ ansible_env.HOME }}/.ssh/{{ ansible_env.USER }}@{{ ansible_hostname }}
+
+      # Github
+      Host github
+        HostName github.com
+        User git
