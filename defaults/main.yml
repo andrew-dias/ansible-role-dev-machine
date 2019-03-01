@@ -32,3 +32,7 @@ github_username:
 github_password:
 gitlab_host:
 gitlab_token:
+
+# mattermost
+mattermost:
+  version: 4.2.0

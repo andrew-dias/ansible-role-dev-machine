@@ -58,3 +58,7 @@
 - include: pidgin.yml
   tags:
     - pidgin
+
+- include: mattermost.yml
+  tags:
+    - mattermost
