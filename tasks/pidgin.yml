@@ -1,0 +1,16 @@
+---
+- name: Add Pidgin repository
+  apt_repository:
+    repo: ppa:langdalepl/pidgin-indicator
+    codename: bionic # override because cosmic doesn't exist
+    update_cache: yes
+  become: yes
+
+- name: Install Pidgin packages
+  apt:
+    name: "{{ item }}"
+  become: yes
+  loop:
+    - pidgin
+    - pidgin-sipe
+    - pidgin-indicator
