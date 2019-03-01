@@ -18,12 +18,14 @@ The role includes:
 - [Spotify](https://www.spotify.com)
 - [Postman](https://www.getpostman.com)
 - [Jetbrains Toolbox](https://www.jetbrains.com/toolbox)
+- [Mattermost](https://mattermost.com/)
+- [Pidgin](https://pidgin.im/)
 - [Docker CE](https://www.docker.com)
 - [VirtualBox](https://www.virtualbox.org)
 - [Vagrant](https://www.vagrantup.com)
 - [Gnome extensions](https://github.com/andrew-dias/ansible-gnome-extensions)
 - Scripts and dotfiles
-- Generate SSH keypair for `user@machine` and upload to Github
+- Generate SSH keypair for `user@machine` and upload to Github and Gitlab
 
 ## Requirements
 
