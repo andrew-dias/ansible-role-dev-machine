@@ -29,7 +29,11 @@ The role includes:
 
 ## Requirements
 
-None.
+JMESPath is required for the [Jetbrains Toolbox](https://github.com/jaredhocutt/ansible-jetbrains-toolbox#requirements) role.
+
+```
+$ sudo apt install python-jmespath
+```
 
 ## Role Variables
 
