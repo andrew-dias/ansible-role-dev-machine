@@ -54,3 +54,7 @@
 - include: vagrant.yml
   tags:
     - vagrant
+
+- include: pidgin.yml
+  tags:
+    - pidgin
