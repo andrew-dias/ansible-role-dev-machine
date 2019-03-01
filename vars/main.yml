@@ -1,4 +1,6 @@
 ---
+### Variables for included roles must go here ###
+
 # ansible-gnome-extensions
 gnome_extension_ids:
   - 442 # drop-down-terminal
