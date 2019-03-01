@@ -1,13 +1,56 @@
 ---
+- name: "Set public key name fact"
+  set_fact:
+    ssh_key_name: "{{ ansible_env.USER }}@{{ ansible_hostname }}"
+
+- name: "Set public key name fact"
+  set_fact:
+    ssh_public_key_file: "{{ ansible_env.HOME }}/.ssh/{{ ssh_key_name }}.pub"
+
 - name: Create SSH key
   user:
     name: "{{ ansible_env.USER }}"
     generate_ssh_key: yes
+    ssh_key_type: rsa
     ssh_key_bits: 4096
-    ssh_key_file: ".ssh/{{ ansible_env.USER }}@{{ ansible_hostname }}"
+    ssh_key_file: ".ssh/{{ ssh_key_name }}"
     ssh_key_passphrase: "{{ ssh_key_passphrase }}"
   register: create_ssh
 
 - name: Upload Github key
-  script: replace-github-ssh-key.sh -u '{{ github_username }}' -p '{{ github_password }}' -k {{ ansible_env.USER }}@{{ ansible_hostname }}
+  script: replace-github-ssh-key.sh -u '{{ github_username }}' -p '{{ github_password }}' -k {{ ssh_key_name }}
   when: create_ssh is changed
+
+##---Upload ssh key to Gitlab---##
+- name: Get ssh keys from Gitlab
+  uri:
+    url: "{{ gitlab_host }}/api/v4/user/keys"
+    method: GET
+    headers:
+      Private-Token: "{{ gitlab_token }}"
+    status_code: "200"
+  register: gitlab_ssh_keys
+
+- name: "Find matching key in json response"
+  set_fact:
+    gitlab_key_id: "{{ item }}"
+  loop: '{{ gitlab_ssh_keys.json | json_query("[?title==''" + ssh_key_name + "''].id") }}'
+
+- name: "Delete key from gitlab if exists"
+  uri:
+    url: "{{ gitlab_host }}/api/v4/user/keys/{{ gitlab_key_id }}"
+    method: DELETE
+    headers:
+      Private-Token: "{{ gitlab_token }}"
+    status_code: "204"
+  when: gitlab_key_id is defined
+
+- name: "Upload new key to gitlab"
+  uri:
+    url: "{{ gitlab_host }}/api/v4/user/keys"
+    method: POST
+    headers:
+      Private-Token: "{{ gitlab_token }}"
+    body_format: json
+    body: "{{ lookup('template', 'gitlab-post-json-template.j2') }}"
+    status_code: "201"
