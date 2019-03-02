@@ -6,7 +6,7 @@
 
 - name: Enable Night Light
   dconf:
-    key: "/org/gnome/calendar/follow-night-light"
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
     value: "true"
     state: present
 
