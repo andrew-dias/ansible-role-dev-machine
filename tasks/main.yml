@@ -1,4 +1,10 @@
 ---
+- name: Set hardware clock to local timezone
+  timezone:
+    hwclock: local
+  tags:
+    - timezone
+
 - include: zsh.yml
   tags:
     - zsh
