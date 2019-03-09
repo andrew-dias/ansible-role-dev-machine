@@ -42,3 +42,7 @@ mattermost:
 # oracle
 oracle:
   install_dir: /opt/oracle
+
+# docker
+docker:
+  credentials_archive_url: https://github.com/docker/docker-credential-helpers/releases/download/v0.6.0/docker-credential-secretservice-v0.6.0-amd64.tar.gz
