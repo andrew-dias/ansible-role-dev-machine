@@ -43,7 +43,6 @@ dependencies:
     scm: git
     src: git+https://github.com/andrew-dias/ansible-role-vagrant.git
     version: master
-    become: yes
     tags:
       - vagrant
 
@@ -51,7 +50,6 @@ dependencies:
     scm: git
     src: git+https://github.com/andrew-dias/ansible-role-virtualbox.git
     version: master
-    become: yes
     tags:
       - virtualbox
 
