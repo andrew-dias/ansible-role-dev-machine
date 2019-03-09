@@ -1,0 +1,12 @@
+---
+- name: Download Docker credentials helper
+  unarchive:
+    remote_src: yes
+    src: "{{ docker.credentials_archive_url }}"
+    dest: "{{ ansible_env.HOME }}/.local/bin"
+    mode: 0700
+
+- name: Define DOCKER_CONFIG location
+  lineinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    line: export DOCKER_CONFIG={{ xdg.XDG_CONFIG_HOME }}/docker
