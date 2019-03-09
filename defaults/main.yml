@@ -38,3 +38,7 @@ ssh:
 # mattermost
 mattermost:
   version: 4.2.0
+
+# oracle
+oracle:
+  install_dir: /opt/oracle

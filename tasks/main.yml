@@ -68,3 +68,7 @@
 - include: mattermost.yml
   tags:
     - mattermost
+
+- include: oracle.yml
+  tags:
+    - oracle

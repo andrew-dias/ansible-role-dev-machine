@@ -1,0 +1,15 @@
+---
+- name: Install Oracle dependencies
+  apt:
+    name: "{{ item }}"
+  become: yes
+  loop:
+    - libaio1
+
+- name: Add Oracle paths to env
+  blockinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - oracle.yml"
+    block: |
+      export LD_LIBRARY_PATH={{ oracle.install_dir }}/instantclient_12_2:$LD_LIBRARY_PATH
+      export PATH={{ oracle.install_dir }}/instantclient_12_2:$PATH
