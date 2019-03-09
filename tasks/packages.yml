@@ -15,6 +15,7 @@
     deb: "{{ item }}"
   become: yes
   loop:
+    - "{{ role_path }}/files/packages/mysql-connector-java"
     - https://release.axocdn.com/linux/gitkraken-amd64.deb
 
 # install pip packages
