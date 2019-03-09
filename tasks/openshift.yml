@@ -1,0 +1,33 @@
+---
+- name: Create temporary download directory
+  tempfile:
+    state: directory
+    suffix: ".openshift_download"
+  register: openshift_download_dir
+  changed_when: no
+
+- name: Download OpenShift client
+  unarchive:
+    src: "{{ oc_archive_url }}"
+    dest: "{{ openshift_download_dir.path }}"
+    remote_src: yes
+
+- name: Copy scripts to bin
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.local/bin"
+    mode: 0744
+  loop:
+    - "{{ openshift_download_dir.path }}/{{ oc_archive_name }}/oc"
+    - "{{ openshift_download_dir.path }}/{{ oc_archive_name }}/kubectl"
+
+- name: Define KUBECONFIG location
+  lineinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    line: export KUBECONFIG={{ xdg.XDG_CONFIG_HOME }}/kube/config
+
+- name: Delete temporary download directory
+  file:
+    path: "{{ openshift_download_dir.path }}"
+    state: absent
+  changed_when: no
