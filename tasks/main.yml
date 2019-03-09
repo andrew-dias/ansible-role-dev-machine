@@ -76,3 +76,7 @@
 - include: docker.yml
   tags:
     - docker
+
+- include: openshift.yml
+  tags:
+    - openshift
