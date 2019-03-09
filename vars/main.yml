@@ -6,6 +6,7 @@ gnome_extension_ids:
   - 442 # drop-down-terminal
   - 615 # AppIndicator support
   - 750 # OpenWeather
+  - 302 # windowoverlay-icons
 
 # geerlinguy.docker
 docker_users:
