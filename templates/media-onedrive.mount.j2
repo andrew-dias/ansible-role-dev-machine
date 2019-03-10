@@ -1,0 +1,15 @@
+[Unit]
+Description=rclone mount for OneDrive
+Requires=systemd-networkd.service
+Wants=network-online.target
+After=network-online.target
+
+[Mount]
+What=rclonefs#onedrive:
+Where=/media/onedrive
+Type=fuse
+Options=auto,config={{ xdg.XDG_CONFIG_HOME }}/rclone/rclone.conf,allow-other,default-permissions
+TimeoutSec=30
+
+[Install]
+WantedBy=multi-user.target
