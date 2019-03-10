@@ -80,3 +80,7 @@
 - include: openshift.yml
   tags:
     - openshift
+
+- include: onedrive.yml
+  tags:
+    - onedrive
