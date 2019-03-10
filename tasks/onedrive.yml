@@ -5,7 +5,7 @@
     name: rclone
   become: yes
 
-- name: Create OneDrive mount point
+- name: Create mount point
   file:
     path: /media/onedrive
     state: directory
@@ -18,21 +18,15 @@
     mode: 0755
   become: yes
 
-- name: Copy systemd automount file
-  copy:
-    src: onedrive/media-onedrive.automount
-    dest: /etc/systemd/system
-  become: yes
-
 - name: Copy systemd mount file
   template:
     src: media-onedrive.mount.j2
     dest: /etc/systemd/system/media-onedrive.mount
   become: yes
 
-- name: Enable systemd automount
+- name: Enable systemd mount
   systemd:
-    name: media-onedrive.automount
+    name: media-onedrive.mount
     enabled: yes
     state: started
   become: yes
