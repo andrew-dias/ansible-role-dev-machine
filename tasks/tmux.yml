@@ -38,6 +38,5 @@
       export GEM_SPEC_CACHE={{ xdg.XDG_CACHE_HOME }}/gem
       export EDITOR=nvim
       alias tmux='tmux -f {{ xdg.XDG_CONFIG_HOME }}/tmux/tmux.conf'
-      alias mux='tmuxinator'
       source {{ xdg.XDG_DATA_HOME }}/tmuxinator/tmuxinator.zsh
     dest: '{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc'
