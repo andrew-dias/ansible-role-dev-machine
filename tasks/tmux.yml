@@ -1,15 +1,43 @@
-- name: Install Tmux
+- name: Install packages
   apt:
-    name: tmux
+    name: '{{ item }}'
   become: yes
-
-- name: Define tmux alias command that respects XDG
-  lineinfile:
-    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
-    line: "alias tmux='tmux -f {{ xdg.XDG_CONFIG_HOME }}/tmux/tmux.conf'"
+  loop:
+    - tmux
+    - ruby
 
 - name: Copy tmux config
   copy:
     src: tmux
-    dest: "{{ xdg.XDG_CONFIG_HOME }}/"
+    dest: '{{ xdg.XDG_CONFIG_HOME }}/'
 
+- name: Create tmuxinator folders
+  file:
+    path: '{{ item }}'
+    state: directory
+  loop:
+    - '{{ xdg.XDG_CONFIG_HOME}}/tmuxinator'
+    - '{{ xdg.XDG_DATA_HOME}}/tmuxinator'
+
+- name: Install tmuxinator gem
+  gem:
+    name: tmuxinator
+    user_install: no
+  become: yes
+
+- name: Download zsh completion script
+  get_url:
+    url: https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh
+    dest: '{{ xdg.XDG_DATA_HOME }}/tmuxinator/tmuxinator.zsh'
+  become: yes
+
+- name: Update zshrc
+  blockinfile:
+    marker: '# {mark} ANSIBLE MANAGED BLOCK - tmux.yml'
+    block: |
+      export GEM_SPEC_CACHE={{ xdg.XDG_CACHE_HOME }}/gem
+      export EDITOR=nvim
+      alias tmux='tmux -f {{ xdg.XDG_CONFIG_HOME }}/tmux/tmux.conf'
+      alias mux='tmuxinator'
+      source {{ xdg.XDG_DATA_HOME }}/tmuxinator/tmuxinator.zsh
+    dest: '{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc'
