@@ -2,7 +2,7 @@
 # https://www.spotify.com/us/download/linux/
 - name: Add Spotify key
   apt_key:
-    url: {{ spotify_key_url }}
+    url: "{{ spotify_key_url }}"
   become: yes
 
 - name: Add Spotify repository
