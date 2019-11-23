@@ -65,7 +65,7 @@ help_message() {
   Options:
   -h, --help      Display this help message and exit.
   -u, --user      Github username
-  -p, --password  Github password
+  -t, --token     Github personal access token
   -k, --keyname   Public key name (assumed to be under ~/.ssh; do not inlcude .pub extension)
 
 _EOF_
@@ -85,8 +85,8 @@ while [[ -n $1 ]]; do
         help_message; graceful_exit ;;
         -u | --user)
         user="$2"; shift ;;
-        -p | --password)
-        password="$2"; shift ;;
+        -t | --token)
+        token="$2"; shift ;;
         -k | --keyname)
         keyname="$2"; shift ;;
         -* | --*)
@@ -110,7 +110,7 @@ key_data=$(cat "$path")
 # check if key exists
 res=$(
     curl --write-out "HTTPSTATUS:%{http_code}" --silent \
-    -u "$user:$password" \
+    -u "$user:$token" \
     https://api.github.com/user/keys
 )
 
@@ -133,7 +133,7 @@ then
     # store the whole response with the status at the and
     res=$(
         curl --write-out "HTTPSTATUS:%{http_code}" --silent \
-        -u "$user:$password" \
+        -u "$user:$token" \
         -X DELETE \
         https://api.github.com/user/keys/$key_id
     )
@@ -153,7 +153,7 @@ fi
 # store the whole response with the status at the and
 res=$(
     curl --write-out "HTTPSTATUS:%{http_code}" --silent \
-    -u "$user:$password" \
+    -u "$user:$token" \
     --data "{\"title\":\"$keyname\",\"key\":\"$key_data\"}" \
     https://api.github.com/user/keys
 )
