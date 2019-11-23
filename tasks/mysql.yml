@@ -1,0 +1,22 @@
+---
+# https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/#repo-qg-apt-repo-manual-setup
+- name: Add MySQL repository key
+  apt_key:
+    keyserver: pgp.mit.edu
+    id: 5072E1F5
+  become: yes
+
+- name: Add MySQL repository
+  apt_repository:
+    repo: deb {{ mysql_apt_repo_link }} {{ ansible_distribution_release }} {{ item }}
+    update_cache: yes
+  become: yes
+  loop:
+    - mysql-8.0
+
+- name: Install MySQL
+  apt:
+    name: "{{ item }}"
+  become: yes
+  loop:
+    - mysql-client
