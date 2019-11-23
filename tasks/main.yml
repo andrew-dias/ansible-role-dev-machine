@@ -73,6 +73,10 @@
   tags:
     - oracle
 
+- include: mysql.yml
+  tags:
+    - mysql
+
 - include: docker.yml
   tags:
     - docker
