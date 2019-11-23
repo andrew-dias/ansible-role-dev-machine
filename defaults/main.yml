@@ -31,7 +31,7 @@ node:
 ssh:
   passphrase:
   github_username:
-  github_password:
+  github_token:
   gitlab_host:
   gitlab_token:
 

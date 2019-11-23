@@ -20,7 +20,7 @@
 - name: Upload keys
   block:
     - name: Upload Github key
-      script: replace-github-ssh-key.sh -u '{{ ssh.github_username }}' -p '{{ ssh.github_password }}' -k {{ ssh_key_name }}
+      script: replace-github-ssh-key.sh -u '{{ ssh.github_username }}' -t '{{ ssh.github_token }}' -k {{ ssh_key_name }}
 
     ##---Upload ssh key to Gitlab---##
     - name: Get ssh keys from Gitlab
