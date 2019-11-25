@@ -1,10 +1,10 @@
 - name: Install packages
   apt:
-    name: '{{ item }}'
-  become: yes
-  loop:
+    name:
     - tmux
     - tmuxinator
+
+  become: yes
 
 - name: Copy tmux config
   copy:
@@ -21,7 +21,7 @@
 
 - name: Download tmuxinator zsh completion script
   get_url:
-    url: https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh
+    url: "{{ tmuxinator.zsh_completion_url }}"
     dest: '{{ xdg.XDG_DATA_HOME }}/tmuxinator/tmuxinator.zsh'
   become: yes
 
