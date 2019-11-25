@@ -12,6 +12,10 @@ zsh:
   zshenv: /etc/zsh/zshenv
   fpath: /usr/local/share/zsh/site-functions
 
+# sdkman!
+sdkman:
+  download_url: https://get.sdkman.io
+
 # nvm
 nvm:
   version: 0.34.0

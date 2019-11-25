@@ -1,7 +1,7 @@
 ---
 - name: Install SDKMAN!
   shell: >
-    curl -o- https://get.sdkman.io | zsh
+    curl -o- {{ sdkman.download_url }} | zsh
   args:
     creates: "{{ xdg.XDG_DATA_HOME }}/sdkman"
     warn: false # ignore curl warnings
