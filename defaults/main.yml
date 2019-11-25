@@ -49,10 +49,6 @@ mattermost:
   download_url: https://releases.mattermost.com/desktop
   version: 4.3.1
 
-# oracle
-oracle:
-  install_dir: /opt/oracle
-
 # pidgin
 pidgin:
   ppa: langdalepl/pidgin-indicator
