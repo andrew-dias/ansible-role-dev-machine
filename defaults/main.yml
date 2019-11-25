@@ -46,7 +46,8 @@ ssh:
 
 # mattermost
 mattermost:
-  version: 4.2.0
+  download_url: https://releases.mattermost.com/desktop
+  version: 4.3.1
 
 # oracle
 oracle:
