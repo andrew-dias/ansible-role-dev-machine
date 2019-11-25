@@ -13,7 +13,6 @@
     dest: "{{ xdg.XDG_CONFIG_HOME }}/"
   loop:
     - git
-    - docker
 
 - name: Copy bin files
   copy:

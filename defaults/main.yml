@@ -49,7 +49,8 @@ oracle:
 
 # docker
 docker:
-  credentials_archive_url: https://github.com/docker/docker-credential-helpers/releases/download/v0.6.0/docker-credential-secretservice-v0.6.0-amd64.tar.gz
+  credentials_archive_url: https://github.com/docker/docker-credential-helpers/releases/download
+  credentials_version: 0.6.3
 
 # openshift
 oc_archive_name: openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit

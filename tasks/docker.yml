@@ -1,8 +1,13 @@
 ---
+- name: Copy Docker config;
+  copy:
+    src: docker
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/"
+
 - name: Download Docker credentials helper
   unarchive:
     remote_src: yes
-    src: "{{ docker.credentials_archive_url }}"
+    src: "{{ docker.credentials_archive_url }}/v{{ docker.credentials_version }}/docker-credential-secretservice-v{{ docker.credentials_version }}-amd64.tar.gz"
     dest: "{{ ansible_env.HOME }}/.local/bin"
     mode: 0700
 
