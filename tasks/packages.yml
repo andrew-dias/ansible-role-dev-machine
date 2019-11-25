@@ -24,6 +24,7 @@
     name:
       - mattermost-desktop
       - postman
+      - spotify
   become: yes
 
 - name: Install classic snap packages
