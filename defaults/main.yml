@@ -57,6 +57,10 @@ oracle:
 pidgin:
   ppa: langdalepl/pidgin-indicator
 
+# gitkraken
+gitkraken:
+  download_url: https://release.axocdn.com/linux/gitkraken-amd64.deb
+
 # docker
 docker:
   credentials_archive_url: https://github.com/docker/docker-credential-helpers/releases/download

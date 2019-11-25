@@ -9,14 +9,13 @@
     - python-pip
     - flameshot
 
-# can't point to gitkraken url because apt won't follow redirect to cdn
 - name: Install Debian packages
   apt:
     deb: "{{ item }}"
   become: yes
   loop:
     - "{{ role_path }}/files/packages/mysql-connector-java"
-    - https://release.axocdn.com/linux/gitkraken-amd64.deb
+    - "{{ gitkraken.download_url }}"
 
 # install pip packages
 - name: Install Pip packages
