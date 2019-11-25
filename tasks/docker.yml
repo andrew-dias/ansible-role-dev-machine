@@ -4,6 +4,11 @@
     dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
     line: export DOCKER_CONFIG={{ xdg.XDG_CONFIG_HOME }}/docker
 
+- name: Create Docker config folder
+  file:
+    path: "{{ xdg.XDG_CONFIG_HOME }}/docker"
+    state: directory
+
 - name: Copy Docker config
   copy:
     src: docker/config
@@ -13,6 +18,7 @@
   copy:
     src: docker/daemon.json
     dest: /etc/docker/daemon.json
+  become: yes
 
 - name: Download Docker credentials helper
   unarchive:
