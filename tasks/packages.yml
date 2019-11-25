@@ -6,6 +6,7 @@
     - dconf-editor
     - python-pip
     - flameshot
+    - gufw
   become: yes
 
 - name: Install Debian packages
