@@ -65,10 +65,6 @@
   tags:
     - pidgin
 
-- include: mattermost.yml
-  tags:
-    - mattermost
-
 - include: docker.yml
   tags:
     - docker

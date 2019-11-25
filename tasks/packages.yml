@@ -18,3 +18,9 @@
   pip:
     name: "{{ ansible_toolbox.download_url }}"
   become: yes
+
+- name: Install snap packages
+  snap:
+    name:
+      - mattermost-desktop
+  become: yes

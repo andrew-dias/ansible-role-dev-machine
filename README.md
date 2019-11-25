@@ -88,13 +88,6 @@ Docker:
 | `docker.credentials_archive_url` | `https://github.com/docker/docker-credential-helpers/releases/download` |
 | `docker.credentials_version`     | `0.6.3`                                                                 |
 
-Mattermost:
-
-| Variable                  | Default Value                             |
-| ------------------------- | ----------------------------------------- |
-| `mattermost.download_url` | `https://releases.mattermost.com/desktop` |
-| `mattermost.version`      | `4.3.1`                                   |
-
 GitKraken
 
 | Variable                 | Default Value                                          |

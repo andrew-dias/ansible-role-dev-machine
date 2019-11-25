@@ -44,11 +44,6 @@ ssh:
   gitlab_host:
   gitlab_token:
 
-# mattermost
-mattermost:
-  download_url: https://releases.mattermost.com/desktop
-  version: 4.3.1
-
 # pidgin
 pidgin:
   ppa: langdalepl/pidgin-indicator
