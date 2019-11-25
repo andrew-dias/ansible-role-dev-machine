@@ -48,7 +48,7 @@ The role includes:
 
 ## Role Variables
 
-The role assumes the usage of the default [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) locations for user config, data and cache folders:
+XDG: The role assumes the usage of the default [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) locations for user config, data and cache folders:
 
 | Variable              | Default Value        |
 | --------------------- | -------------------- |
@@ -63,6 +63,12 @@ ZSH:
 | `zsh.zshenv` | `/etc/zsh/zshenv`                     |
 | `zsh.fpath`  | `/usr/local/share/zsh/site-functions` |
 
+SDKMAN!
+
+| Variable              | Default Value           |
+| --------------------- | ----------------------- |
+| `sdkman.download_url` | `https://get.sdkman.io` |
+
 Node:
 
 | Variable           | Default Value                                      |
@@ -70,6 +76,12 @@ Node:
 | `nvm.download_url` | `https://raw.githubusercontent.com/creationix/nvm` |
 | `nvm.version`      | `0.35.1`                                           |
 | `node.versions`    | `[10, 8]`                                          |
+
+Tmuxinator
+
+| Variable                        | Default Value                                                                              |
+| ------------------------------- | ------------------------------------------------------------------------------------------ |
+| `tmuxinator.zsh_completion_url` | `https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh` |
 
 SSH keys will be generated and uploaded to Github and Gitlab:
 
@@ -81,12 +93,11 @@ SSH keys will be generated and uploaded to Github and Gitlab:
 | `ssh.gitlab_host`     | `empty`       |
 | `ssh.gitlab_token`    | `empty`       |
 
-Docker:
+Pidgin
 
-| Variable                         | Default Value                                                           |
-| -------------------------------- | ----------------------------------------------------------------------- |
-| `docker.credentials_archive_url` | `https://github.com/docker/docker-credential-helpers/releases/download` |
-| `docker.credentials_version`     | `0.6.3`                                                                 |
+| Variable     | Default Value                 |
+| ------------ | ----------------------------- |
+| `pidgin.ppa` | `langdalepl/pidgin-indicator` |
 
 GitKraken
 
@@ -100,23 +111,20 @@ Ansible Toolbox
 | ------------------------------ | ----------------------------------------------- |
 | `ansible_toolbox.download_url` | `git+https://github.com/larsks/ansible-toolbox` |
 
-Pidgin
+Docker:
 
-| Variable     | Default Value                 |
-| ------------ | ----------------------------- |
-| `pidgin.ppa` | `langdalepl/pidgin-indicator` |
+| Variable                         | Default Value                                                           |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| `docker.credentials_archive_url` | `https://github.com/docker/docker-credential-helpers/releases/download` |
+| `docker.credentials_version`     | `0.6.3`                                                                 |
 
-SDKMAN!
+OpenShift:
 
-| Variable              | Default Value           |
-| --------------------- | ----------------------- |
-| `sdkman.download_url` | `https://get.sdkman.io` |
-
-Tmuxinator
-
-| Variable                        | Default Value                                                                              |
-| ------------------------------- | ------------------------------------------------------------------------------------------ |
-| `tmuxinator.zsh_completion_url` | `https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh` |
+| Variable                    | Default Value                                               |
+| --------------------------- | ----------------------------------------------------------- |
+| `openshift.oc_archive_name` | `openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit` |
+| `openshift.oc_archive_url`  | `https://github.com/openshift/origin/releases/download`     |
+| `openshift.oc_version`      | `3.11.0`                                                    |
 
 Fonts
 

@@ -21,20 +21,15 @@ nvm:
   download_url: https://raw.githubusercontent.com/creationix/nvm
   version: 0.35.1
 
-# tmuxinator
-tmuxinator:
-  zsh_completion_url: https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh
-
-# fonts
-fonts:
-  - name: hasklig
-    archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
-
 # node versions
 node:
   versions:
     - 10
     - 8
+
+# tmuxinator
+tmuxinator:
+  zsh_completion_url: https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh
 
 # ssh
 ssh:
@@ -62,5 +57,12 @@ docker:
   credentials_version: 0.6.3
 
 # openshift
-oc_archive_name: openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit
-oc_archive_url: https://github.com/openshift/origin/releases/download/v3.11.0/{{ oc_archive_name }}.tar.gz
+openshift:
+  oc_archive_name: openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit
+  oc_archive_url: https://github.com/openshift/origin/releases/download
+  oc_version: 3.11.0
+
+# fonts
+fonts:
+  - name: hasklig
+    archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
