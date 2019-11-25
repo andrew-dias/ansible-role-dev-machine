@@ -160,23 +160,6 @@ Once completed, you should:
 1. Log out to ensure all changes are activated
 1. Open a terminal and choose your colour theme by typing `base16` followed by a tab to perform tab completion.
 
-The following should be configured manually:
-
-- OneDrive:
-
-  - Follow the steps in the `onedrive.yml` task to install rclone and configure the service
-  - Follow the steps at https://rclone.org/onedrive/ to configure the rclone sync
-
-- Oracle:
-
-  - Install [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html#ic_x64_inst)
-
-- MySQL:
-  - Configure [MySQL APT repositories](https://dev.mysql.com/downloads/repo/apt/)
-  - Install [MySQL client](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/)
-  - Install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
-  - Install [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/)
-
 ## Dependencies
 
 - `cmprescott.chrome`
