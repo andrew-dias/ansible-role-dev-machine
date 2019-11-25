@@ -1,13 +1,12 @@
 ---
 - name: Install APT packages
   apt:
-    name: "{{ item }}"
-  become: yes
-  loop:
+    name:
     - jq
     - dconf-editor
     - python-pip
     - flameshot
+  become: yes
 
 - name: Install Debian packages
   apt:
@@ -17,10 +16,7 @@
     - "{{ role_path }}/files/packages/mysql-connector-java"
     - "{{ gitkraken.download_url }}"
 
-# install pip packages
 - name: Install Pip packages
   pip:
-    name: "{{ item }}"
+    name: "{{ ansible_toolbox.download_url }}"
   become: yes
-  loop:
-    - git+https://github.com/larsks/ansible-toolbox

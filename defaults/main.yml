@@ -61,6 +61,10 @@ pidgin:
 gitkraken:
   download_url: https://release.axocdn.com/linux/gitkraken-amd64.deb
 
+# ansible toolbox
+ansible_toolbox:
+  download_url: git+https://github.com/larsks/ansible-toolbox
+
 # docker
 docker:
   credentials_archive_url: https://github.com/docker/docker-credential-helpers/releases/download
