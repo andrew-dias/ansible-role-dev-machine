@@ -69,10 +69,6 @@
   tags:
     - mattermost
 
-- include: oracle.yml
-  tags:
-    - oracle
-
 - include: docker.yml
   tags:
     - docker
