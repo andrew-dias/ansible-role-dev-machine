@@ -1,43 +1,54 @@
 # ansible-role-dev-machine
 
-This [Ansible](https://github.com/ansible/ansible) role configures my [Pop_OS!](https://system76.com/pop) 18.10 development machine, including applications, OS configuration, and dotfiles.
+This [Ansible](https://github.com/ansible/ansible) role configures my [Pop_OS!](https://system76.com/pop) 18.04 development machine, including applications, OS configuration, and dotfiles.
 
 The role includes:
 
-- [Zsh](http://zsh.sourceforge.net) with configuration, plugins and colour settings
-- [Node Version Manager](https://github.com/creationix/nvm) and desired node versions
-- [SDKMAN!](https://sdkman.io)
-- [Neovim](https://neovim.io) with configuration and plugins
-- [Tmux](https://github.com/tmux/tmux) with configuration
-- [jq](https://stedolan.github.io/jq)
-- dconf-editor
-- Fonts
-- [Visual Studio Code](https://code.visualstudio.com)
-- [Gitkraken](https://www.gitkraken.com)
-- [Google Chrome](https://www.google.com/chrome)
-- [Spotify](https://www.spotify.com)
-- [Postman](https://www.getpostman.com)
-- [Jetbrains Toolbox](https://www.jetbrains.com/toolbox)
-- [Mattermost](https://mattermost.com/)
-- [Pidgin](https://pidgin.im/)
-- [Docker CE](https://www.docker.com)
-- [VirtualBox](https://www.virtualbox.org)
-- [Vagrant](https://www.vagrantup.com)
-- [Gnome extensions](https://github.com/andrew-dias/ansible-gnome-extensions)
-- Scripts and dotfiles
-- Generate SSH keypair for `user@machine` and upload to Github and Gitlab
+- SSH
 
-## Requirements
+  - Generate new SSH keypair for `user@machine` and register with Github and Gitlab
 
-JMESPath is required for the [Jetbrains Toolbox](https://github.com/jaredhocutt/ansible-jetbrains-toolbox#requirements) role.
+- Shell config & desktop environment stuff
 
-```
-$ sudo apt install python-jmespath
-```
+  - [Zsh](http://zsh.sourceforge.net) with configuration, plugins and colour settings
+  - [Gnome extensions](https://github.com/andrew-dias/ansible-gnome-extensions)
+  - [XDG](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) spec folders
+  - [pip](https://pypi.org/project/pip/)
+  - dconf-editor
+  - Fonts
+  - Dotfiles and shell scripts
+
+- General apps
+
+  - [Google Chrome](https://www.google.com/chrome)
+  - [Spotify](https://www.spotify.com)
+  - [Flameshot](https://flameshot.js.org/#/)
+  - [Gufw](https://help.ubuntu.com/community/Gufw)
+
+- Communication
+
+  - [Mattermost](https://mattermost.com/)
+  - [Pidgin](https://pidgin.im/)
+
+- Dev tools
+  - [Node Version Manager](https://github.com/creationix/nvm) and desired node versions
+  - [SDKMAN!](https://sdkman.io)
+  - [Neovim](https://neovim.io) with configuration and plugins
+  - [Tmux](https://github.com/tmux/tmux) with configuration
+  - [Tmuxinator](https://github.com/tmuxinator/tmuxinator)
+  - [jq](https://stedolan.github.io/jq)
+  - [Visual Studio Code](https://code.visualstudio.com)
+  - [Gitkraken](https://www.gitkraken.com)
+  - [Postman](https://www.getpostman.com)
+  - [Jetbrains Toolbox](https://www.jetbrains.com/toolbox)
+  - [Docker CE](https://www.docker.com)
+  - [OpenShift CLI](https://www.okd.io/download.html)
+  - [VirtualBox](https://www.virtualbox.org)
+  - [Vagrant](https://www.vagrantup.com)
 
 ## Role Variables
 
-The role assumes the usage of the default [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) locations for user config, data and cache folders.
+The role assumes the usage of the default [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) locations for user config, data and cache folders:
 
 | Variable              | Default Value        |
 | --------------------- | -------------------- |
@@ -45,56 +56,137 @@ The role assumes the usage of the default [XDG Base Directory Specification](htt
 | `xdg.XDG_CONFIG_HOME` | `$HOME/.config`      |
 | `xdg.XDG_DATA_HOME`   | `$HOME/.local/share` |
 
-Locations of certain zsh folders can be overriden.
+ZSH:
 
 | Variable     | Default Value                         |
 | ------------ | ------------------------------------- |
 | `zsh.zshenv` | `/etc/zsh/zshenv`                     |
 | `zsh.fpath`  | `/usr/local/share/zsh/site-functions` |
 
-Specific software versions can be overriden.
+Node:
 
-| Variable        | Default Value       |
-| --------------- | ------------------- |
-| `nvm.version`   | `0.34.0`            |
-| `node.versions` | `[10.15.1, 8.15.0]` |
+| Variable           | Default Value                                      |
+| ------------------ | -------------------------------------------------- |
+| `nvm.download_url` | `https://raw.githubusercontent.com/creationix/nvm` |
+| `nvm.version`      | `0.35.1`                                           |
+| `node.versions`    | `[10, 8]`                                          |
 
-A optional ssh key passphrase can be set.
+SSH keys will be generated and uploaded to Github and Gitlab:
 
-| Variable             | Default Value |
-| -------------------- | ------------- |
-| `ssh_key_passphrase` | `empty`       |
+| Variable              | Default Value |
+| --------------------- | ------------- |
+| `ssh.passphrase`      | `empty`       |
+| `ssh.github_username` | `empty`       |
+| `ssh.github_token`    | `empty`       |
+| `ssh.gitlab_host`     | `empty`       |
+| `ssh.gitlab_token`    | `empty`       |
 
-The list of fonts to install can be overriden by adding to the `fonts` list.
+Docker:
+
+| Variable                         | Default Value                                                           |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| `docker.credentials_archive_url` | `https://github.com/docker/docker-credential-helpers/releases/download` |
+| `docker.credentials_version`     | `0.6.3`                                                                 |
+
+Mattermost:
+
+| Variable                  | Default Value                             |
+| ------------------------- | ----------------------------------------- |
+| `mattermost.download_url` | `https://releases.mattermost.com/desktop` |
+| `mattermost.version`      | `4.3.1`                                   |
+
+GitKraken
+
+| Variable                 | Default Value                                          |
+| ------------------------ | ------------------------------------------------------ |
+| `gitkraken.download_url` | `https://release.axocdn.com/linux/gitkraken-amd64.deb` |
+
+Ansible Toolbox
+
+| Variable                       | Default Value                                   |
+| ------------------------------ | ----------------------------------------------- |
+| `ansible_toolbox.download_url` | `git+https://github.com/larsks/ansible-toolbox` |
+
+Pidgin
+
+| Variable     | Default Value                 |
+| ------------ | ----------------------------- |
+| `pidgin.ppa` | `langdalepl/pidgin-indicator` |
+
+SDKMAN!
+
+| Variable              | Default Value           |
+| --------------------- | ----------------------- |
+| `sdkman.download_url` | `https://get.sdkman.io` |
+
+Tmuxinator
+
+| Variable                        | Default Value                                                                              |
+| ------------------------------- | ------------------------------------------------------------------------------------------ |
+| `tmuxinator.zsh_completion_url` | `https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh` |
+
+Fonts
+
+| Variable | Default Value                                                                      |
+| -------- | ---------------------------------------------------------------------------------- |
+| fonts    | [[hasklig](https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip)] |
+
+## Pre-Install Steps
+
+- Install JMESPath (required for [Jetbrains Toolbox](https://github.com/jaredhocutt/ansible-jetbrains-toolbox#requirements) role).
+
+  ```
+  $ sudo apt install python-jmespath
+  ```
+
+## Example Playbook
 
 ```
-# fonts
-fonts:
-  - name: hasklig
-    archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
+- hosts: localhost
+  roles:
+    andrew-dias.ansible-role-dev-machine
+
+  # optionally prompt for ssh key passphrase
+  - vars_prompt:
+    - name: "ssh_key_passphrase"
+      prompt: "Enter SSH key passphrase"
+      private: yes
 ```
+
+## Post-Run/Manual Steps
+
+Once completed, you should:
+
+1. Log out to ensure all changes are activated
+1. Open a terminal and choose your colour theme by typing `base16` followed by a tab to perform tab completion.
+
+The following should be configured manually:
+
+- OneDrive:
+
+  - Follow the steps in the `onedrive.yml` task to install rclone and configure the service
+  - Follow the steps at https://rclone.org/onedrive/ to configure the rclone sync
+
+- Oracle:
+
+  - Install [Oracle Instant Client](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html#ic_x64_inst)
+
+- MySQL:
+  - Configure [MySQL APT repositories](https://dev.mysql.com/downloads/repo/apt/)
+  - Install [MySQL client](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/)
+  - Install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+  - Install [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/)
 
 ## Dependencies
 
 - `cmprescott.chrome`
 - `ngetchell.vscode`
-
-## Example Playbook
-
-    - hosts: localhost
-      roles:
-        andrew-dias.ansible-role-dev-machine
-
-      # optionally prompt for ssh key passphrase
-      - vars_prompt:
-        - name: "ssh_key_passphrase"
-          prompt: "Enter SSH key passphrase"
-          private: yes
-
-Once run, you should
-
-1. Log out to ensure all changes are activated
-1. Open a terminal and choose your colour theme by typing `base16` followed by a tab to perform tab completion.
+- `jaredhocutt.jetbrains_toolbox`
+- `gantsign.postman`
+- `geerlingguy.docker`
+- `https://github.com/andrew-dias/ansible-role-vagrant`
+- `https://github.com/andrew-dias/ansible-role-virtualbox`
+- `https://github.com/andrew-dias/ansible-gnome-extensions`
 
 ## License
 
