@@ -8,7 +8,7 @@
     remote_src: yes
     src: "{{ item['archive_url'] }}"
     dest: "{{ xdg.XDG_DATA_HOME }}/fonts"
-  with_items: "{{ fonts }}"
+  loop: "{{ fonts }}"
   register: archive_contents
 
 - name: Update fonts cache
