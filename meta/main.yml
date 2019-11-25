@@ -24,11 +24,6 @@ dependencies:
     tags:
       - jetbrains
 
-  - name: gantsign.postman
-    become: yes
-    tags:
-      - postman
-
   - name: geerlingguy.docker
     become: yes
     tags:

@@ -157,7 +157,6 @@ Once completed, you should:
 
 - `cmprescott.chrome`
 - `jaredhocutt.jetbrains_toolbox`
-- `gantsign.postman`
 - `geerlingguy.docker`
 - `https://github.com/andrew-dias/ansible-role-vagrant`
 - `https://github.com/andrew-dias/ansible-role-virtualbox`

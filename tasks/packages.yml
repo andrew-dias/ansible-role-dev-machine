@@ -23,6 +23,7 @@
   snap:
     name:
       - mattermost-desktop
+      - postman
   become: yes
 
 - name: Install classic snap packages
