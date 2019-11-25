@@ -33,8 +33,8 @@ fonts:
 # node versions
 node:
   versions:
-    - 10.15.1
-    - 8.15.0
+    - 10
+    - 8
 
 # ssh
 ssh:
