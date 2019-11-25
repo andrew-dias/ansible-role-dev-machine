@@ -77,6 +77,8 @@
   tags:
     - openshift
 
-- include: onedrive.yml
-  tags:
-    - onedrive
+### DISABLED TASK BECAUSE CANNOT BE RUN COMPLETELY AUTOMATICALLY
+### KEPT FOR REFERENCE IN ORDER TO RUN MANUALLY
+# - include: onedrive.yml
+#   tags:
+#     - onedrive

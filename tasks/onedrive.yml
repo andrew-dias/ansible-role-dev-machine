@@ -1,9 +1,15 @@
 ---
 # https://blog.tomecek.net/post/automount-with-systemd/
+# https://rclone.org/onedrive/
+- name: Check if rcone is installed
+  shell: rclone -V
+  ignore_errors: true
+  register: rclone_version
+
 - name: Install rclone
-  apt:
-    name: rclone
+  shell: curl https://rclone.org/install.sh | bash
   become: yes
+  when: rclone_version.stdout == ""
 
 - name: Create mount point
   file:
@@ -24,9 +30,10 @@
     dest: /etc/systemd/system/media-onedrive.mount
   become: yes
 
-- name: Enable systemd mount
-  systemd:
-    name: media-onedrive.mount
-    enabled: yes
-    state: started
-  become: yes
+# NOTE: You must run `rclone config` manually before this step can run
+# - name: Enable systemd mount
+#   systemd:
+#     name: media-onedrive.mount
+#     enabled: yes
+#     state: started
+#   become: yes
