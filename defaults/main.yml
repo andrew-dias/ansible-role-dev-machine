@@ -53,6 +53,10 @@ mattermost:
 oracle:
   install_dir: /opt/oracle
 
+# pidgin
+pidgin:
+  ppa: langdalepl/pidgin-indicator
+
 # docker
 docker:
   credentials_archive_url: https://github.com/docker/docker-credential-helpers/releases/download
