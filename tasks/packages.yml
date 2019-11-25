@@ -10,11 +10,8 @@
 
 - name: Install Debian packages
   apt:
-    deb: "{{ item }}"
+    deb: "{{ gitkraken.download_url }}"
   become: yes
-  loop:
-    - "{{ role_path }}/files/packages/mysql-connector-java"
-    - "{{ gitkraken.download_url }}"
 
 - name: Install Pip packages
   pip:
