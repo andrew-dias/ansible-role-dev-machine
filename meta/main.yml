@@ -20,11 +20,6 @@ dependencies:
     tags:
       - chrome
 
-  - name: ngetchell.vscode
-    become: yes
-    tags:
-      - vscode
-
   - name: jaredhocutt.jetbrains_toolbox
     tags:
       - jetbrains

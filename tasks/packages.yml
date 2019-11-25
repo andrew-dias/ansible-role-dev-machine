@@ -24,3 +24,9 @@
     name:
       - mattermost-desktop
   become: yes
+
+- name: Install classic snap packages
+  snap:
+    name: code
+    classic: yes
+  become: yes

@@ -156,7 +156,6 @@ Once completed, you should:
 ## Dependencies
 
 - `cmprescott.chrome`
-- `ngetchell.vscode`
 - `jaredhocutt.jetbrains_toolbox`
 - `gantsign.postman`
 - `geerlingguy.docker`
