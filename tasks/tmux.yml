@@ -2,8 +2,7 @@
   apt:
     name:
     - tmux
-    - tmuxinator
-
+    - ruby-full
   become: yes
 
 - name: Copy tmux config
@@ -19,16 +18,28 @@
     - '{{ xdg.XDG_CONFIG_HOME}}/tmuxinator'
     - '{{ xdg.XDG_DATA_HOME}}/tmuxinator'
 
+- name: Remove tmuxinator apt install if exists
+  apt:
+    name: tmuxinator
+    state: absent
+
+- name: Install tmuxinator gem
+  gem:
+    name: tmuxinator
+    user_install: yes
+
 - name: Download tmuxinator zsh completion script
   get_url:
-    url: "{{ tmuxinator.zsh_completion_url }}"
+    url: '{{ tmuxinator.zsh_completion_url }}'
     dest: '{{ xdg.XDG_DATA_HOME }}/tmuxinator/tmuxinator.zsh'
   become: yes
 
+# PATH export syntax from https://guides.rubygems.org/faqs/#user-install
 - name: Update zshrc
   blockinfile:
     marker: '# {mark} ANSIBLE MANAGED BLOCK - tmux.yml'
     block: |
+      export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
       export EDITOR=nvim
       alias tmux='tmux -f {{ xdg.XDG_CONFIG_HOME }}/tmux/tmux.conf'
       source {{ xdg.XDG_DATA_HOME }}/tmuxinator/tmuxinator.zsh
