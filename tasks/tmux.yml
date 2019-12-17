@@ -22,6 +22,7 @@
   apt:
     name: tmuxinator
     state: absent
+  become: yes
 
 - name: Install tmuxinator gem
   gem:
