@@ -5,6 +5,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'daviesjamie/vim-base16-lightline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 call plug#end()
 
 " set colorscheme to match terminal
