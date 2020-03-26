@@ -3,6 +3,7 @@
     name:
     - tmux
     - ruby-full
+    - xclip
   become: yes
 
 - name: Copy tmux config
