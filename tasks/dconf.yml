@@ -1,7 +1,7 @@
 # python-psutil is required by dconf
-- name: Install python-psutil
+- name: Install python3-psutil
   apt:
-    name: python-psutil
+    name: python3-psutil
   become: yes
 
 - name: Enable Night Light
