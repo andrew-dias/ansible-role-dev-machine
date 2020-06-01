@@ -4,7 +4,8 @@
     name:
     - jq
     - dconf-editor
-    - python-pip
+    - python3-pip
+    - python3-setuptools
     - flameshot
     - gufw
   become: yes
@@ -19,16 +20,16 @@
     name: "{{ ansible_toolbox.download_url }}"
   become: yes
 
-- name: Install snap packages
-  snap:
-    name:
-      - mattermost-desktop
-      - postman
-      - spotify
-  become: yes
+# - name: Install snap packages
+#   snap:
+#     name:
+#       - mattermost-desktop
+#       - postman
+#       - spotify
+#   become: yes
 
-- name: Install classic snap packages
-  snap:
-    name: code
-    classic: yes
-  become: yes
+# - name: Install classic snap packages
+#   snap:
+#     name: code
+#     classic: yes
+#   become: yes
