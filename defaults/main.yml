@@ -39,10 +39,6 @@ ssh:
   gitlab_host:
   gitlab_token:
 
-# pidgin
-pidgin:
-  ppa: langdalepl/pidgin-indicator
-
 # gitkraken
 gitkraken:
   download_url: https://release.axocdn.com/linux/gitkraken-amd64.deb

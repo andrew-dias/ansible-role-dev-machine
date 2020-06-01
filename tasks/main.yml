@@ -57,10 +57,6 @@
   tags:
     - vagrant
 
-- include: pidgin.yml
-  tags:
-    - pidgin
-
 - include: docker.yml
   tags:
     - docker

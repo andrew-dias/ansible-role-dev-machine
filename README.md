@@ -28,7 +28,6 @@ The role includes:
 - Communication
 
   - [Mattermost](https://mattermost.com/)
-  - [Pidgin](https://pidgin.im/)
 
 - Dev tools
   - [Node Version Manager](https://github.com/creationix/nvm) and desired node versions
@@ -92,12 +91,6 @@ SSH keys will be generated and uploaded to Github and Gitlab:
 | `ssh.github_token`    | `empty`       |
 | `ssh.gitlab_host`     | `empty`       |
 | `ssh.gitlab_token`    | `empty`       |
-
-Pidgin
-
-| Variable     | Default Value                 |
-| ------------ | ----------------------------- |
-| `pidgin.ppa` | `langdalepl/pidgin-indicator` |
 
 GitKraken
 
